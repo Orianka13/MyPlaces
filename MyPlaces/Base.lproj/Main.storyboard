@@ -247,6 +247,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="sta-rc-QSJ"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="imageOfPlace" destination="5eL-2F-Y18" id="Mwg-Rr-cvq"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vzv-Pz-gMP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="xJ7-Wt-irW" userLabel="Exit" sceneMemberID="exit"/>
