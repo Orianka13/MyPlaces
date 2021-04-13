@@ -9,12 +9,12 @@ import UIKit
 import RealmSwift
 
 class MainViewController: UITableViewController {
-    
+
     var places: Results<Place>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         places = realm.objects(Place.self)
     }
 
@@ -25,7 +25,7 @@ class MainViewController: UITableViewController {
         return places.isEmpty ? 0 : places.count
     }
 
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
 
@@ -42,6 +42,16 @@ class MainViewController: UITableViewController {
         return cell
     }
     
+    // MARK: - TableView Delegate
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let place = places[indexPath.row]
+            StorageManager.deleteObject(place)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
+
     /*
     // MARK: - Navigation
 
@@ -51,7 +61,7 @@ class MainViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    
+
     @IBAction func unwindSegue(_ segue: UIStoryboardSegue){
         guard let newPlaceVC = segue.source as? NewPlaceViewController else {
             return
@@ -61,3 +71,4 @@ class MainViewController: UITableViewController {
     }
 
 }
+
